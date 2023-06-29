@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  &:hover {
+    transform: scale(1.1);
+    color: gray
+  }
+}
+
+.link {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-decoration: none;
+  color: black;
+}
