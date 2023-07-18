@@ -1,22 +1,19 @@
-import { Box } from "@mui/material";
-import PropTypes from "prop-types";
+import { FC } from "react";
+import PropTypes, { InferProps } from "prop-types";
+import styles from "./index.module.scss";
 
-interface IProps {
-  errorText: string;
+const libPropTypes = {
+  errorText: PropTypes.string.isRequired,
 };
+
+type TSPropsType = InferProps<typeof libPropTypes>;
 
 /**
  * @param {string} errorText text of error to show
  */
 
-export function Error({ errorText }: IProps) {
-  return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "90vh" }}>
-      {errorText}
-    </Box>
-  );
+export const Error: FC<TSPropsType> = ({ errorText }) => {
+  return <div className={styles.wrapper}>{errorText}</div>;
 };
 
-Error.propTypes = {
-  errorText: PropTypes.string.isRequired,
-};
+Error.propTypes = libPropTypes;

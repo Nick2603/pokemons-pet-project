@@ -4,10 +4,12 @@ import { rootReducer } from "./rootReducer";
 import { rootSaga } from "./sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ thunk: false }).concat(middlewares),
 });
 
 sagaMiddleware.run(rootSaga);

@@ -7,7 +7,7 @@ import { router } from "./router";
 import { Layout } from "./components/Layout";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
@@ -16,5 +16,5 @@ root.render(
         <RouterProvider router={router} />
       </Layout>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

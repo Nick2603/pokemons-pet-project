@@ -1,5 +1,8 @@
-import styles from "./Footer.module.scss";
+import { FC } from "react";
+import styles from "./index.module.scss";
 
-export function Footer() {
-  return <footer className={styles.footer}>&copy; All rights reserved 2023</footer>
-}
+export const Footer: FC = () => {
+  return (
+    <footer className={styles.footer}>&copy; All rights reserved 2023</footer>
+  );
+};

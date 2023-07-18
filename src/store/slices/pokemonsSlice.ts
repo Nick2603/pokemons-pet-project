@@ -1,5 +1,5 @@
 import { PokemonFromList, PokemonListResponse } from "../../models/Pokemon";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
@@ -10,7 +10,7 @@ export interface PokemonsState {
   results: PokemonFromList[];
   isLoading: boolean;
   error: string;
-};
+}
 
 const initialState: PokemonsState = {
   count: 0,
@@ -25,11 +25,14 @@ export const pokemonsSlice = createSlice({
   name: "pokemons",
   initialState,
   reducers: {
-    loadPokemons: (state, action: PayloadAction<{ offset?: number; limit?: number }>) => {
+    loadPokemons: (state) => {
       state.isLoading = true;
     },
 
-    loadPokemonsSuccess: (state, action: PayloadAction<PokemonListResponse>) => {
+    loadPokemonsSuccess: (
+      state,
+      action: PayloadAction<PokemonListResponse>,
+    ) => {
       state.count = action.payload.count;
       state.next = action.payload.next;
       state.previous = action.payload.previous;
@@ -45,12 +48,22 @@ export const pokemonsSlice = createSlice({
   },
 });
 
-export const { loadPokemons, loadPokemonsSuccess, loadPokemonsError } = pokemonsSlice.actions;
+export const { loadPokemons, loadPokemonsSuccess, loadPokemonsError } =
+  pokemonsSlice.actions;
+
+const GET_POKEMONS = "pokemons/getPokemons";
+
+export const getPokemons = createAction<{ offset?: number; limit?: number }>(
+  GET_POKEMONS,
+);
 
 export const selectPokemons = (state: RootState) => state.pokemons.results;
 
 export const selectTotalCount = (state: RootState) => state.pokemons.count;
 
-export const selectRequestData = (state: RootState) => ({ isLoading: state.pokemons.isLoading, error: state.pokemons.error });
+export const selectRequestData = (state: RootState) => ({
+  isLoading: state.pokemons.isLoading,
+  error: state.pokemons.error,
+});
 
 export default pokemonsSlice.reducer;

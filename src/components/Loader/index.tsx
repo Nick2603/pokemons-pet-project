@@ -1,9 +1,11 @@
-import { Box, CircularProgress } from "@mui/material";
+import { FC } from "react";
+import { CircularProgress } from "@mui/material";
+import styles from "./index.module.scss";
 
-export function Loader() {
+export const Loader: FC = () => {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "60vh" }}>
+    <div className={styles.wrapper}>
       <CircularProgress />
-    </Box>
+    </div>
   );
 };

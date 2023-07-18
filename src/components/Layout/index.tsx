@@ -1,24 +1,25 @@
-import PropTypes from "prop-types";
+import { FC } from "react";
+import PropTypes, { InferProps } from "prop-types";
 import { Footer } from "../Footer";
-import styles from "./Layout.module.scss";
+import styles from "./index.module.scss";
 
-interface IProps {
-  children: React.ReactNode;
+const libPropTypes = {
+  children: PropTypes.node.isRequired,
 };
 
+type TSPropsType = InferProps<typeof libPropTypes>;
+
 /**
- * @param {React.ReactNode} children ReactNode to show inside Layout
+ * @param {React.ReactNode} children children ReactNode to show inside Layout
  */
 
-export function Layout({ children }: IProps) {
+export const Layout: FC<TSPropsType> = ({ children }) => {
   return (
     <div className={styles.wrapper}>
       <main className={styles.content}>{children}</main>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 };
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+Layout.propTypes = libPropTypes;

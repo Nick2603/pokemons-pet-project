@@ -1,20 +1,20 @@
+import { PropsWithChildren } from "react";
 import PropTypes from "prop-types";
 
 interface IProps {
-  Size: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  children: string;
-};
+  HTag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+}
 
 /**
- * @param {string} Size h1 - h6 tag to use for title
- * @param {string} children title text
+ * @param {string} HTag h1 - h6 tag to use for title
+ * @param {React.ReactNode} children children ReactNode to show inside Title
  */
 
-export function Title({ Size, children }: IProps) {
-  return <Size>{children}</Size>
-};
+export function Title({ HTag, children }: PropsWithChildren<IProps>) {
+  return <HTag>{children}</HTag>;
+}
 
 Title.propTypes = {
-  Size: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6"]).isRequired,
-  children: PropTypes.string.isRequired,
+  HTag: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6"]).isRequired,
+  children: PropTypes.node.isRequired,
 };

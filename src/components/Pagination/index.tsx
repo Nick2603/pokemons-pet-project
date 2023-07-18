@@ -1,11 +1,14 @@
-import PropTypes from "prop-types";
-import styles from "./Pagination.module.scss";
+import { FC } from "react";
+import PropTypes, { InferProps } from "prop-types";
+import styles from "./index.module.scss";
 
-interface IProps {
-  totalPages: number;
-  currentPage: number;
-  onChange: (pageNumber: number) => void;
+const libPropTypes = {
+  totalPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
+
+type TSPropsType = InferProps<typeof libPropTypes>;
 
 /**
  * @param {number} totalPages total number of pages
@@ -13,7 +16,11 @@ interface IProps {
  * @param {function} onChange func to execute on page change
  */
 
-export function Pagination({ totalPages, currentPage, onChange }: IProps) {
+export const Pagination: FC<TSPropsType> = ({
+  totalPages,
+  currentPage,
+  onChange,
+}) => {
   return (
     <div className={styles.wrapper}>
       {Array.from({ length: totalPages }, (_, index) => index + 1).map(
@@ -22,26 +29,24 @@ export function Pagination({ totalPages, currentPage, onChange }: IProps) {
           const action = () => {
             if (!isActive) {
               onChange(pageNumber);
-            };
+            }
           };
 
           return isActive ? (
             <b className={styles.pointer} key={pageNumber} onClick={action}>
-              {" "}{pageNumber}{" "}
+              {" "}
+              {pageNumber}{" "}
             </b>
           ) : (
             <span className={styles.pointer} key={pageNumber} onClick={action}>
-              {" "}{pageNumber}{" "}
+              {" "}
+              {pageNumber}{" "}
             </span>
-          )
+          );
         },
       )}
     </div>
   );
 };
 
-Pagination.propTypes = {
-  totalPages: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+Pagination.propTypes = libPropTypes;
